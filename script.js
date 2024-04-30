@@ -1,56 +1,79 @@
-// Load income history from localStorage or initialize an empty array
-let incomeHistory = localStorage.getItem('incomeHistory');
-if (!incomeHistory) {
-    incomeHistory = [];
-} else {
-    incomeHistory = JSON.parse(incomeHistory);
-}
-
 // Function to calculate total income
 function calculateTotalIncome() {
-    let totalIncome = 0;
-    incomeHistory.forEach(item => {
-        totalIncome += parseInt(item.amount);
+    // Get all income amounts
+    var incomeElements = document.querySelectorAll('.income-amount');
+    var totalIncome = 0;
+    incomeElements.forEach(function(element) {
+        totalIncome += parseFloat(element.textContent.replace(/[^0-9.-]+/g,""));
     });
     return totalIncome;
 }
 
-// Function to update the total income in the UI
+// Function to update total income
 function updateTotalIncome() {
-    document.getElementById('total-income').innerText = `₹ ${calculateTotalIncome()}`;
+    var totalIncome = calculateTotalIncome();
+    document.getElementById('total-income').textContent = 'Total Income: ₹' + totalIncome.toFixed(2);
 }
 
-// Function to render income history
-function renderIncomeHistory() {
-    const incomeHistoryList = document.getElementById('income-history');
-    incomeHistoryList.innerHTML = '';
-    incomeHistory.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `Source: ${item.source}, Amount: ₹${item.amount} 
-            <button class="edit-btn" data-index="${index}">Edit</button> 
-            <button class="delete-btn" data-index="${index}">Delete</button>`;
-        incomeHistoryList.appendChild(li);
-    });
-}
+// Add income button click event
+document.getElementById('add-income').addEventListener('click', function() {
+    var source = document.getElementById('income-source').value.trim();
+    var amount = parseFloat(document.getElementById('income-amount').value.trim());
+    var frequency = document.getElementById('income-frequency').value.trim();
 
-// Initial rendering
-updateTotalIncome();
-renderIncomeHistory();
-
-// Add income form submit event
-document.getElementById('income-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const source = document.getElementById('source').value.trim();
-    const amount = document.getElementById('amount').value.trim();
-
-    if (!source || !amount) {
-        alert('Please enter source and amount');
+    // Validate inputs
+    if (source === '' || isNaN(amount) || amount <= 0 || frequency === '') {
+        alert('Please enter valid income details.');
         return;
     }
 
-    incomeHistory.push({ source, amount });
-    localStorage.setItem('incomeHistory', JSON.stringify(incomeHistory));
+    // Add income to history
+    var incomeHistory = document.getElementById('income-history');
+    var newIncomeItem = document.createElement('li');
+    newIncomeItem.innerHTML = source + ' - ₹' + amount.toFixed(2) + ' (' + frequency + ')' +
+        '<button class="edit-income">Edit</button>' +
+        '<button class="delete-income">Delete</button>';
+    incomeHistory.appendChild(newIncomeItem);
+
+    // Update total income
     updateTotalIncome();
-    renderIncomeHistory();
-    document.getElementById('source').value = '';
-    document.getElementById('amount').value = '';
+
+    // Clear input fields
+    document.getElementById('income-source').value = '';
+    document.getElementById('income-amount').value = '';
+    document.getElementById('income-frequency').value = 'Monthly';
+});
+
+// Edit income button click event
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('edit-income')) {
+        var item = event.target.parentElement;
+        var source = item.textContent.split(' - ')[0];
+        var amount = parseFloat(item.textContent.split(' - ')[1].split(' ')[0].replace('₹', ''));
+        var frequency = item.textContent.split('(')[1].split(')')[0];
+
+        // Update input fields with existing data
+        document.getElementById('income-source').value = source;
+        document.getElementById('income-amount').value = amount;
+        document.getElementById('income-frequency').value = frequency;
+
+        // Delete the income item from history
+        item.remove();
+
+        // Update total income
+        updateTotalIncome();
+    }
+});
+
+// Delete income button click event
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-income')) {
+        event.target.parentElement.remove();
+
+        // Update total income
+        updateTotalIncome();
+    }
+});
+
+// Initial update of total income
+updateTotalIncome();

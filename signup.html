@@ -2,18 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Signup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('login.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-    <div class="center">
-        <form action="register.php" method="post">
-            <label for="username">Username:</label>
+    <form action="signup.php" method="post">
+        <h2>Sign Up</h2>
+        <div class="input-group">
+            <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
-            <input type="submit" value="Sign Up" class="button">
-        </form>
-    </div>
+        </div>
+        <button type="submit">Sign Up</button>
+    </form>
 </body>
 </html>

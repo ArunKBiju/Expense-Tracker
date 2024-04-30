@@ -11,20 +11,42 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+        /* Add additional CSS styles as needed */
     </style>
 </head>
 <body>
-    <form action="signup.php" method="post">
-        <h2>Sign Up</h2>
-        <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">Sign Up</button>
-    </form>
+    <div class="signup-container">
+        <form id="signupForm">
+            <h2>Sign Up</h2>
+            <div class="input-group">
+                <label for="newUsername">Username</label>
+                <input type="text" id="newUsername" name="newUsername" required>
+            </div>
+            <div class="input-group">
+                <label for="newPassword">Password</label>
+                <input type="password" id="newPassword" name="newPassword" required minlength="8">
+            </div>
+            <button type="button" onclick="signup()">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function signup() {
+            var newUsername = document.getElementById('newUsername').value;
+            var newPassword = document.getElementById('newPassword').value;
+
+            if(newPassword.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+
+            // Save the new credentials in local storage
+            localStorage.setItem('username', newUsername);
+            localStorage.setItem('password', newPassword);
+
+            // Redirect to login.html
+            window.location.href = 'login.html';
+        }
+    </script>
 </body>
 </html>

@@ -1,89 +1,56 @@
-// Variables to store income history and total income
-let incomeHistory = [];
-let totalIncome = 0;
+// Load income history from localStorage or initialize an empty array
+let incomeHistory = localStorage.getItem('incomeHistory');
+if (!incomeHistory) {
+    incomeHistory = [];
+} else {
+    incomeHistory = JSON.parse(incomeHistory);
+}
 
-// DOM elements
-const totalIncomeElement = document.getElementById('total-income');
-const incomeHistoryElement = document.getElementById('income-history');
-const moreBtn = document.getElementById('more-btn');
-const addIncomeForm = document.getElementById('add-income-form');
+// Function to calculate total income
+function calculateTotalIncome() {
+    let totalIncome = 0;
+    incomeHistory.forEach(item => {
+        totalIncome += parseInt(item.amount);
+    });
+    return totalIncome;
+}
 
-// Function to update total income
+// Function to update the total income in the UI
 function updateTotalIncome() {
-    totalIncome = incomeHistory.reduce((total, income) => total + income.amount, 0);
-    totalIncomeElement.textContent = `Total Income Till Now: ₹ ${totalIncome.toFixed(2)}`;
+    document.getElementById('total-income').innerText = `₹ ${calculateTotalIncome()}`;
 }
 
-// Function to update income history
-function updateIncomeHistory() {
-    incomeHistoryElement.innerHTML = '';
-    incomeHistory.slice(0, 10).forEach((income, index) => {
+// Function to render income history
+function renderIncomeHistory() {
+    const incomeHistoryList = document.getElementById('income-history');
+    incomeHistoryList.innerHTML = '';
+    incomeHistory.forEach((item, index) => {
         const li = document.createElement('li');
-        li.textContent = `${income.source} - ₹ ${income.amount}`;
-        const editBtn = document.createElement('button');
-        editBtn.textContent = 'Edit';
-        editBtn.classList.add('edit-btn');
-        editBtn.addEventListener('click', () => {
-            const newSource = prompt('Enter new source:');
-            const newAmount = parseFloat(prompt('Enter new amount:'));
-            if (newSource && !isNaN(newAmount)) {
-                income.source = newSource;
-                income.amount = newAmount;
-                updateIncomeHistory();
-                updateTotalIncome();
-                localStorage.setItem('incomeHistory', JSON.stringify(incomeHistory));
-            }
-        });
-        li.appendChild(editBtn);
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.classList.add('delete-btn');
-        deleteBtn.addEventListener('click', () => {
-            incomeHistory.splice(index, 1);
-            updateIncomeHistory();
-            updateTotalIncome();
-            localStorage.setItem('incomeHistory', JSON.stringify(incomeHistory));
-        });
-        li.appendChild(deleteBtn);
-        incomeHistoryElement.appendChild(li);
+        li.innerHTML = `Source: ${item.source}, Amount: ₹${item.amount} 
+            <button class="edit-btn" data-index="${index}">Edit</button> 
+            <button class="delete-btn" data-index="${index}">Delete</button>`;
+        incomeHistoryList.appendChild(li);
     });
-    if (incomeHistory.length > 10) {
-        moreBtn.style.display = 'block';
-    } else {
-        moreBtn.style.display = 'none';
-    }
 }
 
-// Event listener for the add income form submission
-addIncomeForm.addEventListener('submit', (event) => {
+// Initial rendering
+updateTotalIncome();
+renderIncomeHistory();
+
+// Add income form submit event
+document.getElementById('income-form').addEventListener('submit', function(event) {
     event.preventDefault();
-    const source = event.target.elements['source'].value.trim();
-    const amount = parseFloat(event.target.elements['amount'].value);
-    if (source && !isNaN(amount)) {
-        incomeHistory.unshift({ source, amount });
-        updateIncomeHistory();
-        updateTotalIncome();
-        localStorage.setItem('incomeHistory', JSON.stringify(incomeHistory));
-        event.target.reset();
-    } else {
-        alert('Please enter a valid source and amount.');
+    const source = document.getElementById('source').value.trim();
+    const amount = document.getElementById('amount').value.trim();
+
+    if (!source || !amount) {
+        alert('Please enter source and amount');
+        return;
     }
-});
 
-// Load income history from localStorage if available
-if (localStorage.getItem('incomeHistory')) {
-    incomeHistory = JSON.parse(localStorage.getItem('incomeHistory'));
-    updateIncomeHistory();
+    incomeHistory.push({ source, amount });
+    localStorage.setItem('incomeHistory', JSON.stringify(incomeHistory));
     updateTotalIncome();
-}
-
-// Event listener for the "More" button to show additional income history
-moreBtn.addEventListener('click', () => {
-    incomeHistoryElement.innerHTML = '';
-    incomeHistory.forEach((income) => {
-        const li = document.createElement('li');
-        li.textContent = `${income.source} - ₹ ${income.amount}`;
-        incomeHistoryElement.appendChild(li);
-    });
-    moreBtn.style.display = 'none';
-});
+    renderIncomeHistory();
+    document.getElementById('source').value = '';
+    document.getElementById('amount').value = '';

@@ -1,66 +1,93 @@
-// Load existing income data from local storage
-let incomeData = localStorage.getItem('incomeData');
-if (!incomeData) {
-    incomeData = [];
-} else {
-    incomeData = JSON.parse(incomeData);
-}
+// Read the income.txt file
+fetch('income.txt')
+    .then(response => response.text())
+    .then(data => {
+        var incomes = data.split('\n');
+        var totalIncome = incomes.reduce((acc, income) => acc + parseFloat(income.split('-')[1]), 0);
+        document.getElementById('total-income').textContent = 'Total Income: ' + totalIncome.toFixed(2);
+        var historyList = document.getElementById('income-history');
+        incomes.forEach(income => {
+            var [source, amount] = income.split('-');
+            var li = document.createElement('li');
+            li.classList.add('income-entry');
+            li.innerHTML = `
+                <span>${source}</span>
+                <span>${amount}</span>
+                <button class="edit-btn">Edit</button>
+                <button class="done-btn">Done</button>
+                <button class="delete-btn">Delete</button>
+            `;
+            historyList.appendChild(li);
+        });
 
-// Calculate and display total income till now
-let totalIncome = incomeData.reduce((total, income) => total + parseInt(income.amount), 0);
-document.getElementById('total-income').textContent = totalIncome;
+        document.getElementById('income-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var source = document.getElementById('source').value.trim();
+            var amount = parseFloat(document.getElementById('amount').value.trim()).toFixed(2);
+            var newIncome = source + '-' + amount;
+            fetch('income.txt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: newIncome
+                })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    }
+                });
+        });
 
-// Add income form submission
-document.getElementById('income-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    let source = document.getElementById('source').value.trim();
-    let amount = document.getElementById('amount').value.trim();
-    let frequency = document.getElementById('frequency').value;
-    
-    if (source === '' || amount === '') {
-        alert('Please fill in all fields');
-        return;
-    }
-    
-    let incomeItem = {
-        source: source,
-        amount: amount,
-        frequency: frequency
-    };
-    
-    incomeData.push(incomeItem);
-    localStorage.setItem('incomeData', JSON.stringify(incomeData));
-    
-    // Recalculate and update total income
-    totalIncome += parseInt(amount);
-    document.getElementById('total-income').textContent = totalIncome;
-    
-    // Clear form fields
-    document.getElementById('source').value = '';
-    document.getElementById('amount').value = '';
-});
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                var entry = this.parentNode;
+                entry.querySelector('span').setAttribute('contenteditable', 'true');
+                entry.querySelector('span:nth-child(2)').setAttribute('contenteditable', 'true');
+                this.classList.remove('active');
+                entry.querySelector('.done-btn').classList.add('active');
+            });
+        });
 
-// Display income history
-let incomeHistory = document.getElementById('income-history');
-for (let i = 0; i < Math.min(10, incomeData.length); i++) {
-    let income = incomeData[incomeData.length - 1 - i];
-    let item = document.createElement('li');
-    item.textContent = `${income.source}: ₹${income.amount} (${income.frequency})`;
-    incomeHistory.appendChild(item);
-}
+        document.querySelectorAll('.done-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                var entry = this.parentNode;
+                var source = entry.querySelector('span').textContent.trim();
+                var amount = parseFloat(entry.querySelector('span:nth-child(2)').textContent.trim()).toFixed(2);
+                var newIncome = source + '-' + amount;
+                fetch('income.txt', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: newIncome
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        }
+                    });
+            });
+        });
 
-// Show more income history
-let moreBtn = document.getElementById('more-btn');
-let count = 10;
-moreBtn.addEventListener('click', function() {
-    for (let i = count; i < Math.min(count + 10, incomeData.length); i++) {
-        let income = incomeData[incomeData.length - 1 - i];
-        let item = document.createElement('li');
-        item.textContent = `${income.source}: ₹${income.amount} (${income.frequency})`;
-        incomeHistory.appendChild(item);
-    }
-    count += 10;
-    if (count >= incomeData.length) {
-        moreBtn.style.display = 'none';
-    }
-});
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                var entry = this.parentNode;
+                var source = entry.querySelector('span').textContent.trim();
+                var amount = parseFloat(entry.querySelector('span:nth-child(2)').textContent.trim()).toFixed(2);
+                var incomeToDelete = source + '-' + amount;
+                fetch('income.txt', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: incomeToDelete
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        }
+                    });
+            });
+        });
+    });

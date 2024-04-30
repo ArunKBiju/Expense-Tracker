@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Finance Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Finance Tracker</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div class="menu-toggle">
-        <div class="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+<div class="menu-toggle">
+    <div class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-    <div class="menu">
-        <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="settings.html">Settings</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+</div>
+<div class="menu">
+    <ul>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</div>
+<section id="homepage" class="page" style="background-image: url('homepage.gif');">
+    <h1>Welcome to the Personal Finance Tracker</h1>
+    <div class="blocks">
+        <a href="#income" class="block">Add Income</a>
     </div>
-    <section id="homepage" class="page" style="background-image: url('homepage.gif');">
-        <h1>Welcome to the Personal Finance Tracker</h1>
-        <div class="blocks">
-            <a href="income.html" class="block">Income</a>
-            <a href="expenses.html" class="block">Expenses</a>
-            <a href="savings.html" class="block">Savings</a>
-            <a href="reports.html" class="block">Reports</a>
-        </div>
-    </section>
-
-    <!-- Other sections/pages -->
-    <!-- Add other sections/pages with their respective background images -->
-
-    <script src="script.js"></script>
+</section>
+<section id="income" class="page">
+    <h2>Add Income</h2>
+    <form id="add-income-form">
+        <label for="income-source">Source:</label>
+        <input type="text" id="income-source" name="income-source" required><br><br>
+        <label for="income-amount">Amount:</label>
+        <input type="number" id="income-amount" name="income-amount" required><br><br>
+        <button type="submit">Add Income</button>
+    </form>
+    <h2>Total Income: <span id="total-income">0</span></h2>
+    <h3>Income History:</h3>
+    <div id="income-history"></div>
+</section>
+<script src="script.js"></script>
 </body>
-
 </html>

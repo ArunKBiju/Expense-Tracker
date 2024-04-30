@@ -11,13 +11,12 @@
         body {
             background-image: url('index.gif');
             background-size: cover;
-            background-repeat: no-repeat;
+            background-position: center;
             height: 100vh;
-            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column; /* Added to align items vertically */
+            text-align: center;
         }
 
         .block {
@@ -40,12 +39,8 @@
 
 <body>
     <h1>Welcome to the Website</h1>
-    <div>
-        <a href="login.html" class="block">Login</a>
-        <a href="signup.html" class="block">Sign Up</a>
-    </div>
-
-    <script src="script.js"></script>
+    <a href="login.html" class="block">Login</a>
+    <a href="signup.html" class="block">Sign Up</a>
 </body>
 
 </html>

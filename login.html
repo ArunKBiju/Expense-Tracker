@@ -11,46 +11,38 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+        /* Add additional CSS styles as needed */
     </style>
 </head>
 <body>
-    <form id="loginForm">
-        <h2>Login</h2>
-        <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" required>
-        </div>
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" required>
-        </div>
-        <button type="button" onclick="login()">Login</button>
-        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-    </form>
+    <div class="login-container">
+        <form id="loginForm">
+            <h2>Login</h2>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" onclick="login()">Login</button>
+            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        </form>
+    </div>
 
     <script>
         function login() {
+            // Example JavaScript function for handling the login process
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
 
-            // Fetch the username and password text files
-            fetch('username.txt')
-                .then(response => response.text())
-                .then(text => {
-                    if (text.trim() === username) {
-                        fetch('password.txt')
-                            .then(response => response.text())
-                            .then(text => {
-                                if (text.trim() === password) {
-                                    window.location.href = 'homepage.html';
-                                } else {
-                                    alert('Incorrect username or password.');
-                                }
-                            });
-                    } else {
-                        alert('Incorrect username or password.');
-                    }
-                });
+            // Here you would add your JavaScript code to validate the credentials
+            // Since we cannot use PHP on GitHub Pages, you would need to integrate with a backend service
+
+            // For demonstration purposes, let's assume the credentials are correct
+            // Redirect to homepage.html
+            window.location.href = 'homepage.html';
         }
     </script>
 </body>

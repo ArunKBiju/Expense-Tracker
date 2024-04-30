@@ -19,7 +19,50 @@
         <button type="submit">Login</button>
     </form>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get user input
+            var username = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value.trim();
+
+            // Read the username.txt file
+            fetch('username.txt')
+                .then(response => response.text())
+                .then(data => {
+                    var usernames = data.split('\n');
+                    // Check if the username is found in usernames
+                    if (usernames.includes(username)) {
+                        // Read the password.txt file
+                        fetch('password.txt')
+                            .then(response => response.text())
+                            .then(data => {
+                                var passwords = data.split('\n');
+                                // Find the index of the username in usernames
+                                var index = usernames.indexOf(username);
+                                // Check if the password matches the password at the same index
+                                if (passwords[index] === password) {
+                                    // Redirect to homepage.html if login is successful
+                                    window.location.href = 'homepage.html';
+                                } else {
+                                    // Show error message and redirect to index.html after 3 seconds
+                                    alert('Invalid username or password');
+                                    setTimeout(function() {
+                                        window.location.href = 'index.html';
+                                    }, 3000);
+                                }
+                            });
+                    } else {
+                        // Show error message and redirect to index.html after 3 seconds
+                        alert('Invalid username or password');
+                        setTimeout(function() {
+                            window.location.href = 'index.html';
+                        }, 3000);
+                    }
+                });
+        });
+    </script>
 </body>
 
 </html>

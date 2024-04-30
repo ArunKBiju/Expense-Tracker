@@ -14,18 +14,44 @@
     </style>
 </head>
 <body>
-    <form action="login.php" method="post">
+    <form id="loginForm">
         <h2>Login</h2>
         <div class="input-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" required>
         </div>
         <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" required>
         </div>
-        <button type="submit">Login</button>
+        <button type="button" onclick="login()">Login</button>
         <p>Don't have an account? <a href="signup.html">Sign up</a></p>
     </form>
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Fetch the username and password text files
+            fetch('username.txt')
+                .then(response => response.text())
+                .then(text => {
+                    if (text.trim() === username) {
+                        fetch('password.txt')
+                            .then(response => response.text())
+                            .then(text => {
+                                if (text.trim() === password) {
+                                    window.location.href = 'homepage.html';
+                                } else {
+                                    alert('Incorrect username or password.');
+                                }
+                            });
+                    } else {
+                        alert('Incorrect username or password.');
+                    }
+                });
+        }
+    </script>
 </body>
 </html>

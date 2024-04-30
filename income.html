@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <section id="income-page" class="page" style="background-image: url('income.gif');">
+        <h1>Total Income Till Now</h1>
+        <h2 class="total-income">₹0</h2>
+
+        <h2>Add Income Source</h2>
+        <form id="add-income-form">
+            <label for="income-name">Source Name:</label>
+            <input type="text" id="income-name" name="income-name" required><br><br>
+
+            <label for="income-amount">Amount:</label>
+            <input type="number" id="income-amount" name="income-amount" required><br><br>
+
+            <label for="income-frequency">Frequency:</label>
+            <select id="income-frequency" name="income-frequency" required>
+                <option value="monthly">Monthly</option>
+                <option value="weekly">Weekly</option>
+            </select><br><br>
+
+            <button type="submit">Add Income</button>
+        </form>
+
+        <h2>Income History</h2>
+        <ul id="income-history">
+            <!-- Income history will be dynamically populated here -->
+        </ul>
+
+        <button id="more-income-btn">Show More</button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

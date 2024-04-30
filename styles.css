@@ -51,6 +51,26 @@ body {
     position: relative;
     transition: transform 0.3s;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.menu-icon span {
+    display: block;
+    width: 80%;
+    height: 3px;
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 3px;
+}
+
+.menu-icon span:nth-child(2) {
+    width: 60%;
+}
+
+.menu-icon span:nth-child(3) {
+    width: 40%;
 }
 
 .menu.open ul {

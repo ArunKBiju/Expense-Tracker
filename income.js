@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         lastIncomeTransactions.forEach(function(transaction) {
             var incomeEntry = document.createElement('li');
-            incomeEntry.textContent = transaction.source + ' - â‚¹' + transaction.amount.toFixed(2);
+            incomeEntry.textContent = transaction.source + '¹' + transaction.amount.toFixed(2);
             incomeHistory.appendChild(incomeEntry);
         });
 

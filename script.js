@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Income page functionality
-    var addIncomeForm = document.getElementById('income-form');
+    var addIncomeButton = document.getElementById('add-income');
     var incomeHistory = document.getElementById('income-history');
     var totalIncome = document.getElementById('total-income');
     var currentTotalIncome = 0;
 
-    addIncomeForm.addEventListener('submit', function(event) {
+    addIncomeButton.addEventListener('click', function(event) {
         event.preventDefault();
 
         var source = document.getElementById('source').value;

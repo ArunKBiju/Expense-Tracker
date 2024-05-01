@@ -1,25 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var usernameElement = document.getElementById('username');
-    var totalIncomeElement = document.getElementById('total-income');
-    var totalExpenseElement = document.getElementById('total-expense');
-    var totalSavingsElement = document.getElementById('total-savings');
-
-    // Fetch and display username from local storage
+    // Fetch username from local storage and display
     var username = localStorage.getItem('username');
-    usernameElement.textContent = username ? username : '';
+    document.getElementById('username').textContent = username;
 
-    // Fetch and display total income, expense, and savings from local storage
-    var totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
-    var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
+    // Fetch total income, total expense, and total savings from local storage and display
+    var totalIncome = localStorage.getItem('totalIncome') || 0;
+    var totalExpense = localStorage.getItem('totalExpense') || 0;
     var totalSavings = totalIncome - totalExpense;
-
-    totalIncomeElement.textContent = totalIncome.toFixed(2);
-    totalExpenseElement.textContent = totalExpense.toFixed(2);
-    totalSavingsElement.textContent = totalSavings.toFixed(2);
+    document.getElementById('total-income').textContent = totalIncome.toFixed(2);
+    document.getElementById('total-expense').textContent = totalExpense.toFixed(2);
+    document.getElementById('total-savings').textContent = totalSavings.toFixed(2);
 });
 
 function logout() {
-    // Clear local storage and redirect to login page
-    localStorage.clear();
-    window.location.href = 'login.html';
+    // Remove username from local storage and redirect to index.html
+    localStorage.removeItem('username');
+    window.location.href = 'index.html';
 }

@@ -17,23 +17,91 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            flex-direction: column;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            margin: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .transactions {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .show-more {
+            margin-top: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <h1>Income Page</h1>
-    <div>Total Income: <span id="total-income">₹ 0</span></div>
-    <h2>Add Income</h2>
-    <form id="income-form">
-        <label for="source">Source:</label>
-        <input type="text" id="source" name="source" required><br><br>
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" required><br><br>
-        <button type="submit">Add Income</button>
-    </form>
-    <h2>Income History</h2>
-    <ul id="income-history"></ul>
+    <div class="container">
+        <h1>Income Page</h1>
+        <div>Total Income: ₹ <span id="total-income">0</span></div>
+        <h2>Add Income</h2>
+        <form id="income-form">
+            <label for="source">Source:</label>
+            <input type="text" id="source" name="source" required><br>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required><br>
+            <button type="submit">Add Income</button>
+            <button type="button" id="delete-income">Delete Income</button>
+        </form>
+        <h2>Income History</h2>
+        <ul id="income-history"></ul>
+        <div class="transactions">
+            <h3>Last 5 Transactions</h3>
+            <ul id="last-transactions"></ul>
+            <button class="show-more">Show More</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

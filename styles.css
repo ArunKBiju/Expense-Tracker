@@ -73,5 +73,5 @@ li {
 
 /* Additional styles */
 body {
-    background-color: transparent; /* Set the background color to transparent */
-}
+    background-color: transparent !important; /* Set the background color to transparent */
+}p

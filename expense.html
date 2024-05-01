@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expenses Page</title>
+    <title>Expense Page</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -80,13 +79,12 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <h1>Expenses Page</h1>
-        <div>Total Expenses: ₹ <span id="total-income">0</span></div>
+        <h1>Expense Page</h1>
+        <div>Total Expenses: ₹ <span id="total-expenses">0</span></div>
         <h2>Add Expense</h2>
-        <form id="income-form">
+        <form id="expense-form">
             <label for="source">Source:</label>
             <input type="text" id="source" name="source" required><br>
             <label for="amount">Amount:</label>
@@ -94,10 +92,9 @@
             <button type="submit">Add Expense</button>
         </form>
         <h2>Expense History</h2>
-        <ul id="income-history"></ul>
+        <ul id="expense-history"></ul>
+        <button id="show-more-expense" class="show-more" style="display:none;">Show More</button>
     </div>
-
     <script src="script.js"></script>
 </body>
-
 </html>

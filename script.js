@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Income page functionality
     var incomeForm = document.getElementById('income-form');
     var incomeHistory = document.getElementById('income-history');
     var totalIncome = document.getElementById('total-income');
@@ -52,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateIncomeHistory();
     }
 
-    // Expense page functionality
     var expenseForm = document.getElementById('expense-form');
     var expenseHistory = document.getElementById('expense-history');
     var totalExpenses = document.getElementById('total-expenses');
@@ -79,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentTotalExpenses = expenseTransactions.reduce(function(acc, transaction) {
             return acc + transaction.amount;
         }, 0);
-        totalExpenses.textContent = '₹' + currentTotalExpenses.toFixed(2);
+        totalExpenses.textContent = currentTotalExpenses >= 0 ? '₹' + currentTotalExpenses.toFixed(2) : '-₹' + Math.abs(currentTotalExpenses).toFixed(2);
     }
 
     function updateExpenseHistory() {

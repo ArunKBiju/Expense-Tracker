@@ -5,14 +5,24 @@ document.addEventListener('DOMContentLoaded', function() {
     var incomeTransactions = [];
     var showMoreIncomeIndex = 5;
 
+    // Load transactions from localStorage
+    if (localStorage.getItem('incomeTransactions')) {
+        incomeTransactions = JSON.parse(localStorage.getItem('incomeTransactions'));
+        updateTotalIncome();
+        updateIncomeHistory();
+    }
+
     incomeForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission behavior
+        event.preventDefault();
 
         var source = document.getElementById('source').value;
         var amount = parseFloat(document.getElementById('amount').value);
 
         var incomeTransaction = { source: source, amount: amount };
         incomeTransactions.unshift(incomeTransaction);
+
+        // Save transactions to localStorage
+        localStorage.setItem('incomeTransactions', JSON.stringify(incomeTransactions));
 
         updateTotalIncome();
         updateIncomeHistory();

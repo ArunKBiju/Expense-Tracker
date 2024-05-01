@@ -1,23 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Populate user info
-    var usernameSpan = document.getElementById('username');
-    var dobInput = document.getElementById('dob');
-    var emailInput = document.getElementById('email');
-    usernameSpan.textContent = localStorage.getItem('username') || 'username';
-    dobInput.value = localStorage.getItem('dob') || 'xx/xx/xxxx';
-    emailInput.value = localStorage.getItem('email') || 'abc@gmail.com';
+    // Display username
+    var username = localStorage.getItem('username') || 'User';
+    document.getElementById('username').textContent = username;
 
-    // Fetch and display total income, total expense, and total savings
+    // Fetch total income, total expense, and total savings from local storage
     var totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
     var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
-    var totalSavings = totalIncome - totalExpense;
+    var totalSavings = parseFloat(localStorage.getItem('totalSavings')) || 0;
 
+    // Display total income, total expense, and total savings
     document.getElementById('total-income').textContent = totalIncome.toFixed(2);
     document.getElementById('total-expense').textContent = totalExpense.toFixed(2);
-    document.getElementById('total-savings').textContent = totalSavings >= 0 ? '₹' + totalSavings.toFixed(2) : '-₹' + Math.abs(totalSavings).toFixed(2);
-});
+    document.getElementById('total-savings').textContent = totalSavings.toFixed(2);
 
-function logout() {
-    // Redirect to login.html
-    window.location.href = 'login.html';
-}
+    // Logout button functionality
+    document.getElementById('logout-button').addEventListener('click', function() {
+        localStorage.removeItem('username');
+        window.location.href = 'login.html';
+    });
+});

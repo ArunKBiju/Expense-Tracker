@@ -1,3 +1,4 @@
+/* Existing styles */
 body, html {
     height: 100%;
     margin: 0;
@@ -15,7 +16,7 @@ body, html {
     text-align: center;
 }
 
-.button {
+.button, button {
     display: inline-block;
     padding: 10px 20px;
     margin: 10px;
@@ -23,8 +24,49 @@ body, html {
     color: white;
     text-decoration: none;
     border-radius: 5px;
+    cursor: pointer; /* Add cursor style for buttons */
 }
 
-.button:hover {
+.button:hover, button:hover {
     background-color: #0056b3;
+}
+
+/* New styles for the income tracking application */
+.container {
+    max-width: 400px;
+    margin: 20px auto; /* Center the container */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="text"],
+input[type="number"],
+button[type="submit"] { /* Style the submit button as well */
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+.show-more {
+    margin-top: 10px;
+    cursor: pointer;
 }

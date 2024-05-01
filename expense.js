@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var expenseTransactions = [];
     var showMoreExpenseIndex = 5;
 
+    // Load transactions from localStorage
+    if (localStorage.getItem('expenseTransactions')) {
+        expenseTransactions = JSON.parse(localStorage.getItem('expenseTransactions'));
+        updateTotalExpenses();
+        updateExpenseHistory();
+    }
+
     expenseForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -13,6 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var expenseTransaction = { source: source, amount: amount };
         expenseTransactions.unshift(expenseTransaction);
+
+        // Save transactions to localStorage
+        localStorage.setItem('expenseTransactions', JSON.stringify(expenseTransactions));
 
         updateTotalExpenses();
         updateExpenseHistory();

@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var incomeTransactions = [];
     var showMoreIncomeIndex = 5;
 
+    // Load transactions from localStorage
+    if (localStorage.getItem('incomeTransactions')) {
+        incomeTransactions = JSON.parse(localStorage.getItem('incomeTransactions'));
+        updateTotalIncome();
+        updateIncomeHistory();
+    }
+
     incomeForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -13,6 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var incomeTransaction = { source: source, amount: amount };
         incomeTransactions.unshift(incomeTransaction);
+
+        // Save transactions to localStorage
+        localStorage.setItem('incomeTransactions', JSON.stringify(incomeTransactions));
 
         updateTotalIncome();
         updateIncomeHistory();
@@ -35,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         lastIncomeTransactions.forEach(function(transaction) {
             var incomeEntry = document.createElement('li');
-            incomeEntry.textContent = transaction.source + '₹' + transaction.amount.toFixed(2);
+            incomeEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2);
             incomeHistory.appendChild(incomeEntry);
         });
 

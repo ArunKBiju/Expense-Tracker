@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var transactions = []; // Array to store all transactions
     var showMoreIndex = 5; // Index to track the "Show More" functionality
 
+    // Attach the event listener to the form's submit event
     incomeForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -48,11 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add "Show More" button if there are more transactions to show
         if (transactions.length > showMoreIndex) {
-            var showMoreButton = document.createElement('button');
-            showMoreButton.textContent = 'Show More';
-            showMoreButton.className = 'show-more';
+            var showMoreButton = document.getElementById('show-more');
+            showMoreButton.style.display = 'block';
             showMoreButton.addEventListener('click', showMoreTransactions);
-            incomeHistory.appendChild(showMoreButton);
         }
     }
 
@@ -61,11 +60,4 @@ document.addEventListener('DOMContentLoaded', function() {
         showMoreIndex += 5;
         updateIncomeHistory();
     }
-
-    // Function to update the display of transactions
-    function displayTransactions() {
-        // Your logic to display transactions goes here
-    }
-
-    // Additional functionality can be added below
 });

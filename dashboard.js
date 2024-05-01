@@ -1,21 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Display username
-    var username = localStorage.getItem('username') || 'User';
-    document.getElementById('username').textContent = username;
+    var usernameElement = document.getElementById('username');
+    var totalIncomeElement = document.getElementById('total-income');
+    var totalExpenseElement = document.getElementById('total-expense');
+    var totalSavingsElement = document.getElementById('total-savings');
 
-    // Fetch total income, total expense, and total savings from local storage
+    // Fetch and display username from local storage
+    var username = localStorage.getItem('username');
+    usernameElement.textContent = username ? username : '';
+
+    // Fetch and display total income, expense, and savings from local storage
     var totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
     var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
-    var totalSavings = parseFloat(localStorage.getItem('totalSavings')) || 0;
+    var totalSavings = totalIncome - totalExpense;
 
-    // Display total income, total expense, and total savings
-    document.getElementById('total-income').textContent = ' ' + totalIncome.toFixed(2) + ' ';
-    document.getElementById('total-expense').textContent = ' ' + totalExpense.toFixed(2) + ' ';
-    document.getElementById('total-savings').textContent = ' ' + totalSavings.toFixed(2) + ' ';
-
-    // Logout button functionality
-    document.getElementById('logout-button').addEventListener('click', function() {
-        localStorage.removeItem('username');
-        window.location.href = 'login.html';
-    });
+    totalIncomeElement.textContent = totalIncome.toFixed(2);
+    totalExpenseElement.textContent = totalExpense.toFixed(2);
+    totalSavingsElement.textContent = totalSavings.toFixed(2);
 });
+
+function logout() {
+    // Clear local storage and redirect to login page
+    localStorage.clear();
+    window.location.href = 'login.html';
+}

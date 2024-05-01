@@ -12,6 +12,9 @@
             background-image: url('dashboard.gif');
             background-repeat: no-repeat;
             background-size: cover;
+        }
+
+        .container {
             padding: 20px;
             color: white;
             text-align: center;
@@ -21,37 +24,37 @@
             margin-top: 0;
         }
 
-        .user-info {
-            margin-bottom: 20px;
-        }
-
-        .user-info div {
-            margin-bottom: 10px;
-        }
-
-        .user-info button {
+        .info {
             margin-top: 20px;
-            padding: 5px 10px;
-            background-color: #333;
+            text-align: left;
+        }
+
+        .info p {
+            margin: 5px 0;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
             color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-        }
-
-        .user-info button:hover {
-            background-color: #555;
         }
     </style>
 </head>
 
 <body>
-    <h1>Dashboard</h1>
-    <div class="user-info">
-        <div>Name: <span id="username"></span></div>
-        <div>Total Income: ₹ <span id="total-income"></span></div>
-        <div>Total Expense: ₹ <span id="total-expense"></span></div>
-        <div>Total Savings: ₹ <span id="total-savings"></span></div>
-        <button id="logout-button">Logout</button>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="info">
+            <p>Name: <span id="username"></span></p>
+            <p>Total Income: ₹ <span id="total-income"></span></p>
+            <p>Total Expense: ₹ <span id="total-expense"></span></p>
+            <p>Total Savings: ₹ <span id="total-savings"></span></p>
+        </div>
+        <button onclick="logout()">Logout</button>
     </div>
     <script src="dashboard.js"></script>
 </body>

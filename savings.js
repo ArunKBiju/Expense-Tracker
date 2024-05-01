@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var savingsTransactions = [];
     var showMoreSavingsIndex = 5;
 
+    // Load transactions from localStorage
+    if (localStorage.getItem('savingsTransactions')) {
+        savingsTransactions = JSON.parse(localStorage.getItem('savingsTransactions'));
+        updateTotalSavings();
+        updateSavingsHistory();
+    }
+
     savingsForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -13,6 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var savingsTransaction = { source: source, amount: amount };
         savingsTransactions.unshift(savingsTransaction);
+
+        // Save transactions to localStorage
+        localStorage.setItem('savingsTransactions', JSON.stringify(savingsTransactions));
 
         updateTotalSavings();
         updateSavingsHistory();

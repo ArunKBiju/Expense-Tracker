@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Welcome to the website</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            background-image: url('login.gif');
+            background-image: url('index.gif');
             background-size: cover;
             background-repeat: no-repeat;
             height: 100vh;
@@ -20,66 +20,28 @@
             flex-direction: column; /* Added to align items vertically */
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .block {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            margin: 10px auto;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
         }
 
-        label, input, button {
-            margin: 10px;
+        .block:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 
 <body>
-    <h1>Login</h1>
-    <form id="login-form">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
-
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Get user input
-            var username = document.getElementById('username').value.trim();
-            var password = document.getElementById('password').value.trim();
-
-            // Read the username.txt file
-            fetch('username.txt')
-                .then(response => response.text())
-                .then(data => {
-                    var usernames = data.split('\n');
-                    // Check if the username is found in usernames
-                    if (usernames.includes(username)) {
-                        // Read the password.txt file
-                        fetch('password.txt')
-                            .then(response => response.text())
-                            .then(data => {
-                                var passwords = data.split('\n');
-                                // Find the index of the username in usernames
-                                var index = usernames.indexOf(username);
-                                // Check if the password matches the password at the same index
-                                if (passwords[index] === password) {
-                                    // Redirect to homepage.html if login is successful
-                                    window.location.href = 'homepage.html';
-                                } else {
-                                    // Show error message and stay on the login page
-                                    alert('Invalid username or password');
-                                }
-                            });
-                    } else {
-                        // Show error message and stay on the login page
-                        alert('Invalid username or password');
-                    }
-                });
-        });
-    </script>
+    <h1>Welcome to the website</h1>
+    <a href="login.html" class="block">Login</a>
+    <a href="signup.html" class="block">Sign Up</a>
 </body>
 
 </html>

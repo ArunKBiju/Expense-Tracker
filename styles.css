@@ -70,3 +70,8 @@ li {
     margin-top: 10px;
     cursor: pointer;
 }
+
+/* Additional styles */
+body {
+    background-color: transparent; /* Set the background color to transparent */
+}

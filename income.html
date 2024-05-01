@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,11 @@
     <title>Income Page</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body style="background-image: url('income.gif'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
     <div class="container">
         <h1>Income Page</h1>
-        <div>Total Income: <span id="total-income">₹0.00</span></div>
+        <div>Total Income: ₹ <span id="total-income">0</span></div>
         <h2>Add Income</h2>
         <form id="income-form">
             <label for="source">Source:</label>
@@ -21,8 +23,9 @@
         </form>
         <h2>Income History</h2>
         <ul id="income-history"></ul>
-        <button id="show-more" class="show-more" style="display:none;">Show More</button>
+        <button id="show-more-income" class="show-more" style="display:none;">Show More</button>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,63 +1,59 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var incomeForm = document.getElementById('income-form');
-    var incomeHistory = document.getElementById('income-history');
-    var totalIncome = document.getElementById('total-income');
-    var incomeTransactions = [];
-    var showMoreIncomeIndex = 5;
+// Update total income and savings whenever a new income is added
+function updateTotalIncomeAndSavings() {
+    updateTotalIncome();
+    updateTotalSavings();
+}
 
-    // Load transactions from localStorage
-    if (localStorage.getItem('incomeTransactions')) {
-        incomeTransactions = JSON.parse(localStorage.getItem('incomeTransactions'));
-        updateTotalIncome();
-        updateIncomeHistory();
-    }
+// Add new income transaction to the history
+function addIncomeTransactionToHistory(transaction) {
+    var incomeEntry = document.createElement('li');
+    incomeEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2) + ' (Income)';
+    incomeHistory.appendChild(incomeEntry);
+}
 
-    incomeForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+// Add new expense transaction to the history
+function addExpenseTransactionToHistory(transaction) {
+    var expenseEntry = document.createElement('li');
+    expenseEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2) + ' (Expense)';
+    expenseHistory.appendChild(expenseEntry);
+}
 
-        var source = document.getElementById('source').value;
-        var amount = parseFloat(document.getElementById('amount').value);
+// Update income history and show the last 5 transactions
+function updateIncomeHistory() {
+    incomeHistory.innerHTML = '';
+    var lastIncomeTransactions = incomeTransactions.slice(0, 5);
+    lastIncomeTransactions.forEach(addIncomeTransactionToHistory);
+}
 
-        var incomeTransaction = { source: source, amount: amount };
-        incomeTransactions.unshift(incomeTransaction);
+// Update expense history and show the last 5 transactions
+function updateExpenseHistory() {
+    expenseHistory.innerHTML = '';
+    var lastExpenseTransactions = expenseTransactions.slice(0, 5);
+    lastExpenseTransactions.forEach(addExpenseTransactionToHistory);
+}
 
-        // Save transactions to localStorage
-        localStorage.setItem('incomeTransactions', JSON.stringify(incomeTransactions));
+// Update total income, savings, and income history
+function updateIncome() {
+    updateTotalIncomeAndSavings();
+    updateIncomeHistory();
+}
 
-        updateTotalIncome();
-        updateIncomeHistory();
+// Add event listener to income form
+incomeForm.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-        document.getElementById('source').value = '';
-        document.getElementById('amount').value = '';
-    });
+    var source = document.getElementById('source').value;
+    var amount = parseFloat(document.getElementById('amount').value);
 
-    function updateTotalIncome() {
-        var currentTotalIncome = incomeTransactions.reduce(function(acc, transaction) {
-            return acc + transaction.amount;
-        }, 0);
-        totalIncome.textContent = '₹' + currentTotalIncome.toFixed(2);
-    }
+    var incomeTransaction = { source: source, amount: amount };
+    incomeTransactions.unshift(incomeTransaction);
 
-    function updateIncomeHistory() {
-        incomeHistory.innerHTML = '';
+    updateIncome();
 
-        var lastIncomeTransactions = incomeTransactions.slice(0, showMoreIncomeIndex);
-
-        lastIncomeTransactions.forEach(function(transaction) {
-            var incomeEntry = document.createElement('li');
-            incomeEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2);
-            incomeHistory.appendChild(incomeEntry);
-        });
-
-        if (incomeTransactions.length > showMoreIncomeIndex) {
-            var showMoreIncomeButton = document.getElementById('show-more-income');
-            showMoreIncomeButton.style.display = 'block';
-            showMoreIncomeButton.addEventListener('click', showMoreIncomeTransactions);
-        }
-    }
-
-    function showMoreIncomeTransactions() {
-        showMoreIncomeIndex += 5;
-        updateIncomeHistory();
-    }
+    document.getElementById('source').value = '';
+    document.getElementById('amount').value = '';
 });
+
+// Initialize income history and total income
+updateTotalIncome();
+updateIncomeHistory();

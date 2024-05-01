@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalSavingsAmount = totalIncome - totalExpense;
 
     // Display total savings
-    totalSavings.textContent = '₹' + totalSavingsAmount.toFixed(2);
+    totalSavings.textContent = totalSavingsAmount >= 0 ? '₹' + totalSavingsAmount.toFixed(2) : '-₹' + Math.abs(totalSavingsAmount).toFixed(2);
 
     // Get the last 5 transactions from both income and expense
     var incomeTransactions = JSON.parse(localStorage.getItem('incomeTransactions')) || [];

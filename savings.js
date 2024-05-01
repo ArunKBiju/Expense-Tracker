@@ -1,63 +1,39 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var savingsForm = document.getElementById('savings-form');
-    var savingsHistory = document.getElementById('savings-history');
-    var totalSavings = document.getElementById('total-savings');
-    var savingsTransactions = [];
-    var showMoreSavingsIndex = 5;
+// Calculate total savings based on total income and total expenses
+function calculateTotalSavings() {
+    var currentTotalIncome = incomeTransactions.reduce(function(acc, transaction) {
+        return acc + transaction.amount;
+    }, 0);
+    
+    var currentTotalExpenses = expenseTransactions.reduce(function(acc, transaction) {
+        return acc + transaction.amount;
+    }, 0);
 
-    // Load transactions from localStorage
-    if (localStorage.getItem('savingsTransactions')) {
-        savingsTransactions = JSON.parse(localStorage.getItem('savingsTransactions'));
-        updateTotalSavings();
-        updateSavingsHistory();
-    }
+    return currentTotalIncome - currentTotalExpenses;
+}
 
-    savingsForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+// Update total savings
+function updateTotalSavings() {
+    totalSavings.textContent = '₹' + calculateTotalSavings().toFixed(2);
+}
 
-        var source = document.getElementById('source').value;
-        var amount = parseFloat(document.getElementById('amount').value);
+// Update savings history and show the last 5 transactions
+function updateSavingsHistory() {
+    savingsHistory.innerHTML = '';
+    var lastTransactions = [...incomeTransactions, ...expenseTransactions].slice(0, 5);
 
-        var savingsTransaction = { source: source, amount: amount };
-        savingsTransactions.unshift(savingsTransaction);
-
-        // Save transactions to localStorage
-        localStorage.setItem('savingsTransactions', JSON.stringify(savingsTransactions));
-
-        updateTotalSavings();
-        updateSavingsHistory();
-
-        document.getElementById('source').value = '';
-        document.getElementById('amount').value = '';
+    lastTransactions.forEach(function(transaction) {
+        var savingsEntry = document.createElement('li');
+        savingsEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2) + (transaction in incomeTransactions ? ' (Income)' : ' (Expense)');
+        savingsHistory.appendChild(savingsEntry);
     });
+}
 
-    function updateTotalSavings() {
-        var currentTotalSavings = savingsTransactions.reduce(function(acc, transaction) {
-            return acc + transaction.amount;
-        }, 0);
-        totalSavings.textContent = '₹' + currentTotalSavings.toFixed(2);
-    }
+// Update total savings and savings history
+function updateSavings() {
+    updateTotalSavings();
+    updateSavingsHistory();
+}
 
-    function updateSavingsHistory() {
-        savingsHistory.innerHTML = '';
-
-        var lastSavingsTransactions = savingsTransactions.slice(0, showMoreSavingsIndex);
-
-        lastSavingsTransactions.forEach(function(transaction) {
-            var savingsEntry = document.createElement('li');
-            savingsEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2);
-            savingsHistory.appendChild(savingsEntry);
-        });
-
-        if (savingsTransactions.length > showMoreSavingsIndex) {
-            var showMoreSavingsButton = document.getElementById('show-more-savings');
-            showMoreSavingsButton.style.display = 'block';
-            showMoreSavingsButton.addEventListener('click', showMoreSavingsTransactions);
-        }
-    }
-
-    function showMoreSavingsTransactions() {
-        showMoreSavingsIndex += 5;
-        updateSavingsHistory();
-    }
-});
+// Initialize savings history and total savings
+updateTotalSavings();
+updateSavingsHistory();

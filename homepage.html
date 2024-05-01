@@ -1,33 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personal Finance Tracker</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('homepage.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Added to align items vertically */
+        }
+
+        .menu-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            width: 30px;
+            height: 5px;
+            background-color: black;
+            margin: 6px 0;
+        }
+
+        .menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 12px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 6px 12px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .blocks {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .blocks a {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            margin: 10px auto;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .blocks a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
+
 <body>
-<div class="menu-toggle">
-    <div class="menu-icon">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</div>
-<div class="menu">
-    <ul>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</div>
-<section id="homepage" class="page" style="background-image: url('homepage.gif');">
     <h1>Welcome to the Personal Finance Tracker</h1>
     <div class="blocks">
-        <a href="#income" class="block">Add Income</a>
+        <a href="income.html">Income</a>
+        <a href="expenses.html">Expenses</a>
+        <a href="savings.html">Savings</a>
     </div>
-</section>
-<script src="script.js"></script>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div class="menu-icon"></div>
+        <div class="menu-icon"></div>
+        <div class="menu-icon"></div>
+    </div>
+    <div class="menu" id="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+    </script>
 </body>
+
 </html>

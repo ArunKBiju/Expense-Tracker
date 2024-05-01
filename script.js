@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentTotalIncome = transactions.reduce(function(acc, transaction) {
             return acc + transaction.amount;
         }, 0);
-        totalIncome.textContent =  currentTotalIncome.toFixed(2);
+        totalIncome.textContent = '₹' + currentTotalIncome.toFixed(2);
     }
 
     function updateIncomeHistory() {

@@ -14,57 +14,44 @@
             background-size: cover;
             padding: 20px;
             color: white;
+            text-align: center;
         }
 
         h1 {
             margin-top: 0;
         }
 
-        .dashboard-data {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .dashboard-data div {
+        .user-info {
             margin-bottom: 20px;
         }
 
-        .logout {
-            text-align: center;
-            margin-top: 20px;
+        .user-info div {
+            margin-bottom: 10px;
         }
 
-        .logout button {
+        .user-info button {
+            margin-top: 20px;
             padding: 5px 10px;
             background-color: #333;
             color: white;
             border: none;
             cursor: pointer;
         }
+
+        .user-info button:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Dashboard</h1>
-        <div class="dashboard-data">
-            <div>
-                <h2>Total Income:</h2>
-                <span id="total-income">0</span>
-            </div>
-            <div>
-                <h2>Total Expense:</h2>
-                <span id="total-expense">0</span>
-            </div>
-            <div>
-                <h2>Total Savings:</h2>
-                <span id="total-savings">0</span>
-            </div>
-        </div>
-        <div class="logout">
-            <button onclick="logout()">Logout</button>
-        </div>
+    <h1>Dashboard</h1>
+    <div class="user-info">
+        <div>Name: <span id="username"></span></div>
+        <div>Total Income: ₹ <span id="total-income"></span></div>
+        <div>Total Expense: ₹ <span id="total-expense"></span></div>
+        <div>Total Savings: ₹ <span id="total-savings"></span></div>
+        <button id="logout-button">Logout</button>
     </div>
     <script src="dashboard.js"></script>
 </body>

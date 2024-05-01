@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var source = document.getElementById('source').value;
         var amount = parseFloat(document.getElementById('amount').value);
 
-        var expenseTransaction = { source: source, amount: amount };
+        var expenseTransaction = { source: source, amount: -amount }; // Note the negative sign
         expenseTransactions.unshift(expenseTransaction);
 
         updateTotalExpenses();
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentTotalExpenses = expenseTransactions.reduce(function(acc, transaction) {
             return acc + transaction.amount;
         }, 0);
-        totalExpenses.textContent = '₹' + currentTotalExpenses.toFixed(2);
+        totalExpenses.textContent = '₹' + Math.abs(currentTotalExpenses).toFixed(2); // Use Math.abs to get the positive value
     }
 
     function updateExpenseHistory() {
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         lastExpenseTransactions.forEach(function(transaction) {
             var expenseEntry = document.createElement('li');
-            expenseEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2);
+            expenseEntry.textContent = transaction.source + ' - ₹' + Math.abs(transaction.amount).toFixed(2); // Use Math.abs to get the positive value
             expenseHistory.appendChild(expenseEntry);
         });
 
@@ -120,24 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
         updateExpenseHistory();
     }
 
-    // Dashboard button functionality
-    var dashboardButton = document.getElementById('dashboard-button');
-    dashboardButton.addEventListener('click', function() {
-        // Your logic for the dashboard button
-        alert('Dashboard button clicked!');
-    });
-
-    // About button functionality
-    var aboutButton = document.getElementById('about-button');
-    aboutButton.addEventListener('click', function() {
-        // Your logic for the about button
-        alert('About button clicked!');
-    });
-
-    // Contact button functionality
-    var contactButton = document.getElementById('contact-button');
-    contactButton.addEventListener('click', function() {
-        // Your logic for the contact button
-        alert('Contact button clicked!');
-    });
+    // Initial updates
+    updateTotalIncome();
+    updateIncomeHistory();
+    updateTotalExpenses();
+    updateExpenseHistory();
 });

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Menu toggle functionality
     var menuToggle = document.querySelector('.menu-toggle');
     var menu = document.querySelector('.menu');
-    
+
     menuToggle.addEventListener('click', function() {
         menu.classList.toggle('active');
     });
@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Income page functionality
-    var addIncomeButton = document.getElementById('add-income');
+    var incomeForm = document.getElementById('income-form');
     var incomeHistory = document.getElementById('income-history');
     var totalIncome = document.getElementById('total-income');
     var currentTotalIncome = 0;
 
-    addIncomeButton.addEventListener('click', function(event) {
+    incomeForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
         var source = document.getElementById('source').value;

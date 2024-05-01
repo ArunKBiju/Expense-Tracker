@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,9 +11,12 @@
             background-image: url('dashboard.gif');
             background-repeat: no-repeat;
             background-size: cover;
+        }
+
+        .container {
+            padding: 20px;
             color: white;
             text-align: center;
-            padding: 20px;
         }
 
         h1 {
@@ -22,55 +24,48 @@
         }
 
         .user-info {
-            margin-bottom: 20px;
-        }
-
-        .user-info div {
-            margin-bottom: 10px;
+            margin-top: 20px;
+            text-align: left;
         }
 
         .user-info label {
-            font-weight: bold;
-            margin-right: 5px;
+            display: inline-block;
+            width: 150px;
         }
 
-        .logout {
+        .user-info input {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+
+        .totals {
             margin-top: 20px;
+            text-align: left;
+        }
+
+        .totals div {
+            margin-bottom: 10px;
         }
     </style>
 </head>
-
 <body>
-    <h1>Dashboard</h1>
-    <div class="user-info">
-        <div>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="user-info">
             <label for="username">Name:</label>
-            <span id="username">John Doe</span>
-        </div>
-        <div>
-            <label for="dob">Date of Birth:</label>
-            <span id="dob">01/01/1990</span>
-        </div>
-        <div>
+            <span id="username">username</span><br>
+            <label for="dob">Date of birth:</label>
+            <input type="text" id="dob" name="dob" value="xx/xx/xxxx"><br>
             <label for="email">Email:</label>
-            <span id="email">john.doe@example.com</span>
+            <input type="email" id="email" name="email" value="abc@gmail.com"><br>
         </div>
+        <div class="totals">
+            <div>Total Income: ₹ <span id="total-income">0</span></div>
+            <div>Total Expense: ₹ <span id="total-expense">0</span></div>
+            <div>Total Savings: ₹ <span id="total-savings">0</span></div>
+        </div>
+        <button onclick="logout()">Logout</button>
     </div>
-    <div>
-        <label for="total-income">Total Income:</label>
-        <span id="total-income">0</span>
-    </div>
-    <div>
-        <label for="total-expense">Total Expense:</label>
-        <span id="total-expense">0</span>
-    </div>
-    <div>
-        <label for="total-savings">Total Savings:</label>
-        <span id="total-savings">0</span>
-    </div>
-    <button class="logout" onclick="logout()">Logout</button>
-
     <script src="dashboard.js"></script>
 </body>
-
 </html>

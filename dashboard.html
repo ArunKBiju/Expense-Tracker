@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('dashboard.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .user-info {
+            margin-bottom: 20px;
+        }
+
+        .user-info div {
+            margin-bottom: 10px;
+        }
+
+        .user-info label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .logout {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dashboard</h1>
+    <div class="user-info">
+        <div>
+            <label for="username">Name:</label>
+            <span id="username">John Doe</span>
+        </div>
+        <div>
+            <label for="dob">Date of Birth:</label>
+            <span id="dob">01/01/1990</span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <span id="email">john.doe@example.com</span>
+        </div>
+    </div>
+    <div>
+        <label for="total-income">Total Income:</label>
+        <span id="total-income">0</span>
+    </div>
+    <div>
+        <label for="total-expense">Total Expense:</label>
+        <span id="total-expense">0</span>
+    </div>
+    <div>
+        <label for="total-savings">Total Savings:</label>
+        <span id="total-savings">0</span>
+    </div>
+    <button class="logout" onclick="logout()">Logout</button>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

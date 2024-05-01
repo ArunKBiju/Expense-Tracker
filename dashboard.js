@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalSavings = parseFloat(localStorage.getItem('totalSavings')) || 0;
 
     // Display total income, total expense, and total savings
-    document.getElementById('total-income').textContent = totalIncome.toFixed(2);
-    document.getElementById('total-expense').textContent = totalExpense.toFixed(2);
-    document.getElementById('total-savings').textContent = totalSavings.toFixed(2);
+    document.getElementById('total-income').textContent = ' ' + totalIncome.toFixed(2) + ' ';
+    document.getElementById('total-expense').textContent = ' ' + totalExpense.toFixed(2) + ' ';
+    document.getElementById('total-savings').textContent = ' ' + totalSavings.toFixed(2) + ' ';
 
     // Logout button functionality
     document.getElementById('logout-button').addEventListener('click', function() {

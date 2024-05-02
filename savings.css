@@ -41,3 +41,13 @@ h2 {
     padding-bottom: 10px; /* Adjust as needed */
     margin-bottom: 10px; /* Adjust as needed */
 }
+
+/* Add this CSS for the green plus and red minus symbols */
+.plus {
+    color: green;
+    font-weight: bold;
+}
+.minus {
+    color: red;
+    font-weight: bold;
+}

@@ -1,17 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Your existing code for dashboard functionality
+    var usernameElement = document.getElementById('username');
+    var totalIncomeElement = document.getElementById('total-income');
+    var totalExpenseElement = document.getElementById('total-expense');
+    var totalSavingsElement = document.getElementById('total-savings');
 
-    // Logout function
-    function logout() {
-        // Implement your logout logic here
-        alert("Logged out successfully!"); // Placeholder alert, replace with actual logic
-    }
+    // Load user information from localStorage
+    var username = localStorage.getItem('username');
+    var totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
+    var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
+    var totalSavings = parseFloat(localStorage.getItem('totalSavings')) || 0;
 
-    // Delete Account function
+    // Display user information
+    usernameElement.textContent = username;
+    totalIncomeElement.textContent = totalIncome.toFixed(2);
+    totalExpenseElement.textContent = totalExpense.toFixed(2);
+    totalSavingsElement.textContent = totalSavings.toFixed(2);
+
+    // Logout button
+    document.getElementById('logout').addEventListener('click', function() {
+        window.location.href = 'index.html';
+    });
+
+    // Delete account function
     function deleteAccount() {
-        if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-            // Implement your delete account logic here
-            alert("Account deleted!"); // Placeholder alert, replace with actual logic
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            // Clear all user data
+            localStorage.clear();
+            // Redirect to index.html
+            window.location.href = 'index.html';
         }
     }
 });

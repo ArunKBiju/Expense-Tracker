@@ -25,16 +25,19 @@ ul {
     padding: 0;
 }
 
-ul li {
-    margin-bottom: 10px;
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-/* Green plus symbol for income transactions */
-.income {
-    color: green;
-}
-
-/* Red minus symbol for expense transactions */
-.expense {
-    color: red;
+/* Add this CSS to create a white line below the heading */
+h2 {
+    border-bottom: 0.7mm solid white;
+    padding-bottom: 10px; /* Adjust as needed */
+    margin-bottom: 10px; /* Adjust as needed */
 }

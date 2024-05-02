@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
     var totalSavingsAmount = totalIncome - totalExpense;
 
-    // Display total savings
+    // Display total savings or a message if the expense is more than the income
     if (totalSavingsAmount >= 1) {
         totalSavings.textContent = '₹' + totalSavingsAmount.toFixed(2);
     } else {
-        totalSavings.textContent = 'The expense is more than the income, which results in no savings';
+        totalSavings.textContent = 'The expense is more than the income, which results in no savings.';
     }
 
     // Get the last 5 transactions from both income and expense
@@ -21,28 +21,32 @@ document.addEventListener('DOMContentLoaded', function() {
     var allTransactions = incomeTransactions.concat(expenseTransactions);
     var lastTransactions = allTransactions.slice(-5);
 
-    // Display last 5 transactions
+    // Display transaction history with +/- symbols and colors
     savingsHistory.innerHTML = '';
     lastTransactions.forEach(function(transaction) {
+        var symbol = transaction.amount >= 0 ? '+' : '-';
+        var color = transaction.amount >= 0 ? 'green' : 'red';
         var savingsEntry = document.createElement('li');
-        var sign = transaction.source === 'income' ? '+' : '-'; // Use '+' for income and '-' for expense
-        savingsEntry.textContent = sign + ' ₹' + Math.abs(transaction.amount).toFixed(2);
+        savingsEntry.textContent = symbol + ' ₹' + Math.abs(transaction.amount).toFixed(2) + ' - ' + transaction.source;
+        savingsEntry.style.color = color;
         savingsHistory.appendChild(savingsEntry);
     });
 
-    // Show More button
+    // Add 'Show More' button if there are more than 5 transactions
     if (allTransactions.length > 5) {
         var showMoreButton = document.createElement('button');
         showMoreButton.textContent = 'Show More';
         showMoreButton.addEventListener('click', function() {
-            var additionalTransactions = allTransactions.slice(-10, -5); // Get the next 5 transactions
+            var additionalTransactions = allTransactions.slice(-(allTransactions.length - 5));
             additionalTransactions.forEach(function(transaction) {
+                var symbol = transaction.amount >= 0 ? '+' : '-';
+                var color = transaction.amount >= 0 ? 'green' : 'red';
                 var savingsEntry = document.createElement('li');
-                var sign = transaction.source === 'income' ? '+' : '-';
-                savingsEntry.textContent = sign + ' ₹' + Math.abs(transaction.amount).toFixed(2);
+                savingsEntry.textContent = symbol + ' ₹' + Math.abs(transaction.amount).toFixed(2) + ' - ' + transaction.source;
+                savingsEntry.style.color = color;
                 savingsHistory.appendChild(savingsEntry);
             });
-            showMoreButton.style.display = 'none'; // Hide the button after showing additional transactions
+            showMoreButton.style.display = 'none';
         });
         savingsHistory.appendChild(showMoreButton);
     }

@@ -1,19 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Fetch username from local storage and display
-    var username = localStorage.getItem('username');
-    document.getElementById('username').textContent = username;
+    // Your existing code for dashboard functionality
 
-    // Fetch total income, total expense, and total savings from local storage and display
-    var totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
-    var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
-    var totalSavings = totalIncome - totalExpense;
-    document.getElementById('total-income').textContent = '₹' + totalIncome.toFixed(2);
-    document.getElementById('total-expense').textContent = '₹' + totalExpense.toFixed(2);
-    document.getElementById('total-savings').textContent = '₹' + totalSavings.toFixed(2);
+    // Logout function
+    function logout() {
+        // Implement your logout logic here
+        alert("Logged out successfully!"); // Placeholder alert, replace with actual logic
+    }
+
+    // Delete Account function
+    function deleteAccount() {
+        if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+            // Implement your delete account logic here
+            alert("Account deleted!"); // Placeholder alert, replace with actual logic
+        }
+    }
 });
-
-function logout() {
-    // Remove username from local storage and redirect to index.html
-    localStorage.removeItem('username');
-    window.location.href = 'index.html';
-}

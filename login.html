@@ -29,6 +29,18 @@
         label, input, button {
             margin: 10px;
         }
+
+        /* Style for the signup link */
+        #signup-link {
+            margin-top: 10px;
+            color: #007bff; /* Blue color for the link */
+            cursor: pointer; /* Show pointer cursor on hover */
+            text-decoration: none; /* Remove underline from link */
+        }
+
+        #signup-link:hover {
+            text-decoration: underline; /* Underline link on hover */
+        }
     </style>
 </head>
 
@@ -39,6 +51,8 @@
         <input type="text" id="username" name="username" required><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
+        <!-- Added signup link -->
+        <a href="signup.html" id="signup-link">Don't have an account? Sign Up here</a><br><br>
         <button type="submit">Login</button>
     </form>
 

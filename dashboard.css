@@ -26,8 +26,6 @@ h1 {
 .info {
     margin-top: 20px;
     text-align: left;
-    border-bottom: 0.7mm solid white; /* Add this line */
-    padding-bottom: 5px; /* Optional: Adjust spacing */
 }
 
 .info p {
@@ -42,4 +40,11 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Add this CSS to create a white line below each section */
+.container > *:not(h1) {
+    border-bottom: 0.7mm solid white;
+    padding-bottom: 10px; /* Adjust as needed */
+    margin-bottom: 10px; /* Adjust as needed */
 }

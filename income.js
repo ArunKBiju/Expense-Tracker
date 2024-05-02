@@ -31,6 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('amount').value = '';
     });
 
+    // Add event listener for the "Clear All" button
+    document.getElementById('clear-all').addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear all income?')) {
+            incomeTransactions = [];
+            localStorage.removeItem('incomeTransactions');
+            updateTotalIncome();
+            updateIncomeHistory();
+        }
+    });
+
     function updateTotalIncome() {
         var currentTotalIncome = incomeTransactions.reduce(function(acc, transaction) {
             return acc + transaction.amount;

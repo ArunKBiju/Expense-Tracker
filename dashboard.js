@@ -17,16 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
     totalSavingsElement.textContent = totalSavings.toFixed(2);
 
     // Logout button
-    console.log('Adding event listener for logout button...');
     document.getElementById('logout').addEventListener('click', function() {
-        console.log('Logout button clicked');
         window.location.href = 'index.html';
     });
 
     // Delete account button
-    console.log('Adding event listener for delete account button...');
     document.getElementById('delete-account').addEventListener('click', function() {
-        console.log('Delete account button clicked');
         if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
             // Clear all user data
             localStorage.clear();

@@ -1,0 +1,17 @@
+body {
+    background-image: url('expense.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    padding: 20px;
+    color: white;
+    text-align: center;
+}

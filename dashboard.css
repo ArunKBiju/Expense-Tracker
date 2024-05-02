@@ -42,8 +42,8 @@ button {
     cursor: pointer;
 }
 
-/* Add this CSS to create a white line below each section */
-.container > *:not(h1) {
+/* Add this CSS to create a white line below the heading and above the button */
+h1, button {
     border-bottom: 0.7mm solid white;
     padding-bottom: 10px; /* Adjust as needed */
     margin-bottom: 10px; /* Adjust as needed */

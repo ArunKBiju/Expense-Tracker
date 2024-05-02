@@ -46,6 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return acc + transaction.amount;
         }, 0);
         totalIncome.textContent = currentTotalIncome.toFixed(2);
+
+        // Update total income in dashboard if available
+        localStorage.setItem('totalIncome', currentTotalIncome.toFixed(2));
+        var dashboardTotalIncomeElement = document.getElementById('total-income-dashboard');
+        if (dashboardTotalIncomeElement) {
+            dashboardTotalIncomeElement.textContent = currentTotalIncome.toFixed(2);
+        }
     }
 
     function updateIncomeHistory() {

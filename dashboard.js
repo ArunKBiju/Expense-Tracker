@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'index.html';
     });
 
-    // Delete account function
-    function deleteAccount() {
+    // Delete account button
+    document.getElementById('delete-account').addEventListener('click', function() {
         if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
             // Clear all user data
             localStorage.clear();
             // Redirect to index.html
             window.location.href = 'index.html';
         }
-    }
+    });
 });

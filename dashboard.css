@@ -1,9 +1,17 @@
-body {
-    background-image: url('dashboard.gif');
-    background-repeat: no-repeat;
-    background-size: cover;
+body, html {
+    height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
+    background-image: url('dashboard.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
@@ -33,8 +41,4 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
 }

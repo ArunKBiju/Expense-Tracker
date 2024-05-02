@@ -26,6 +26,8 @@ h1 {
 .info {
     margin-top: 20px;
     text-align: left;
+    border-bottom: 0.7mm solid white; /* Add this line */
+    padding-bottom: 5px; /* Optional: Adjust spacing */
 }
 
 .info p {

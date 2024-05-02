@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentTotalExpenses = expenseTransactions.reduce(function(acc, transaction) {
             return acc + transaction.amount;
         }, 0);
-        totalExpenses.textContent = currentTotalExpenses >= 0 ? '₹' + currentTotalExpenses.toFixed(2) : '-₹' + Math.abs(currentTotalExpenses).toFixed(2);
+        totalExpenses.textContent = currentTotalExpenses >= 0 ? currentTotalExpenses.toFixed(2) : '-' + Math.abs(currentTotalExpenses).toFixed(2);
     }
 
     function updateExpenseHistory() {

@@ -44,48 +44,7 @@ button {
 
 /* Add this CSS to create a white line below each section */
 .container > *:not(h1) {
-    padding-bottom: 10px; /* Adjust as needed */
-    margin-bottom: 10px; /* Adjust as needed */
-}
-
-/* Add an additional line break after the heading */
-.container h1 {
-    margin-bottom: 10px; /* Adjust as needed */
-}
-
-/* Add a white line after the heading */
-.container h1:after {
-    content: "";
-    display: block;
-    border-bottom: 0.7mm solid white;
-    margin-top: 10px; /* Adjust as needed */
-    margin-bottom: 10px; /* Adjust as needed */
-}
-
-/* Add a white line after the name area */
-.info {
-    margin-bottom: 10px; /* Adjust as needed */
     border-bottom: 0.7mm solid white;
     padding-bottom: 10px; /* Adjust as needed */
-}
-
-/* Add a white line after the total income */
-#total-income {
     margin-bottom: 10px; /* Adjust as needed */
-    border-bottom: 0.7mm solid white;
-    padding-bottom: 10px; /* Adjust as needed */
-}
-
-/* Add a white line after the total expense */
-#total-expense {
-    margin-bottom: 10px; /* Adjust as needed */
-    border-bottom: 0.7mm solid white;
-    padding-bottom: 10px; /* Adjust as needed */
-}
-
-/* Add a white line after the total savings */
-#total-savings {
-    margin-bottom: 10px; /* Adjust as needed */
-    border-bottom: 0.7mm solid white;
-    padding-bottom: 10px; /* Adjust as needed */
 }

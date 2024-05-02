@@ -25,6 +25,16 @@ ul {
     padding: 0;
 }
 
-li {
+ul li {
     margin-bottom: 10px;
+}
+
+/* Green plus symbol for income transactions */
+.income {
+    color: green;
+}
+
+/* Red minus symbol for expense transactions */
+.expense {
+    color: red;
 }

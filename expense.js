@@ -46,6 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return acc + transaction.amount;
         }, 0);
         totalExpense.textContent = currentTotalExpense.toFixed(2);
+
+        // Update total expense in dashboard if available
+        localStorage.setItem('totalExpense', currentTotalExpense.toFixed(2));
+        var dashboardTotalExpenseElement = document.getElementById('total-expense-dashboard');
+        if (dashboardTotalExpenseElement) {
+            dashboardTotalExpenseElement.textContent = currentTotalExpense.toFixed(2);
+        }
     }
 
     function updateExpenseHistory() {

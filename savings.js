@@ -1,53 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the elements from the HTML
     var totalSavings = document.getElementById('total-savings');
     var savingsHistory = document.getElementById('savings-history');
+    var showMoreButton = document.getElementById('show-more');
+    var allTransactions = [];
+    var showMoreIndex = 5;
 
     // Calculate total savings
     var totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
     var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
     var totalSavingsAmount = totalIncome - totalExpense;
 
-    // Display total savings or a message if the expense is more than the income
-    if (totalSavingsAmount >= 1) {
-        totalSavings.textContent = '₹' + totalSavingsAmount.toFixed(2);
-    } else {
-        totalSavings.textContent = 'The expense is more than the income, which results in no savings.';
-    }
+    // Display total savings
+    totalSavings.textContent = totalSavingsAmount >= 1 ? '₹' + totalSavingsAmount.toFixed(2) : 'The expense is more than the income, which results in no savings';
 
-    // Get the last 5 transactions from both income and expense
+    // Get all transactions
     var incomeTransactions = JSON.parse(localStorage.getItem('incomeTransactions')) || [];
     var expenseTransactions = JSON.parse(localStorage.getItem('expenseTransactions')) || [];
-    var allTransactions = incomeTransactions.concat(expenseTransactions);
-    var lastTransactions = allTransactions.slice(-5);
+    allTransactions = incomeTransactions.concat(expenseTransactions);
 
-    // Display transaction history with +/- symbols and colors
-    savingsHistory.innerHTML = '';
-    lastTransactions.forEach(function(transaction) {
-        var symbol = transaction.amount >= 0 ? '+' : '-';
-        var color = transaction.amount >= 0 ? 'green' : 'red';
-        var savingsEntry = document.createElement('li');
-        savingsEntry.textContent = symbol + ' ₹' + Math.abs(transaction.amount).toFixed(2) + ' - ' + transaction.source;
-        savingsEntry.style.color = color;
-        savingsHistory.appendChild(savingsEntry);
-    });
+    // Display transaction history
+    function updateTransactionHistory() {
+        savingsHistory.innerHTML = '';
 
-    // Add 'Show More' button if there are more than 5 transactions
-    if (allTransactions.length > 5) {
-        var showMoreButton = document.createElement('button');
-        showMoreButton.textContent = 'Show More';
-        showMoreButton.addEventListener('click', function() {
-            var additionalTransactions = allTransactions.slice(-(allTransactions.length - 5));
-            additionalTransactions.forEach(function(transaction) {
-                var symbol = transaction.amount >= 0 ? '+' : '-';
-                var color = transaction.amount >= 0 ? 'green' : 'red';
-                var savingsEntry = document.createElement('li');
-                savingsEntry.textContent = symbol + ' ₹' + Math.abs(transaction.amount).toFixed(2) + ' - ' + transaction.source;
-                savingsEntry.style.color = color;
-                savingsHistory.appendChild(savingsEntry);
-            });
-            showMoreButton.style.display = 'none';
+        var transactionsToShow = allTransactions.slice(0, showMoreIndex);
+        transactionsToShow.forEach(function(transaction) {
+            var symbol = transaction.type === 'income' ? '+' : '-';
+            var color = transaction.type === 'income' ? 'green' : 'red';
+            var transactionEntry = document.createElement('li');
+            transactionEntry.textContent = symbol + ' ₹' + transaction.amount.toFixed(2);
+            transactionEntry.style.color = color;
+            savingsHistory.appendChild(transactionEntry);
         });
-        savingsHistory.appendChild(showMoreButton);
+
+        if (allTransactions.length > showMoreIndex) {
+            showMoreButton.style.display = 'block';
+            showMoreButton.addEventListener('click', showMoreTransactions);
+        } else {
+            showMoreButton.style.display = 'none';
+        }
     }
+
+    function showMoreTransactions() {
+        showMoreIndex += 5;
+        updateTransactionHistory();
+    }
+
+    updateTransactionHistory();
 });

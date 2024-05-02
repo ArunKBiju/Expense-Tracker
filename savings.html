@@ -5,48 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savings</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-image: url('savings.gif');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-color: #f0f0f0; /* Set your desired background color */
-        }
-
-        .container {
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
-
-        h1 {
-            margin-top: 0;
-        }
-
-        .transactions {
-            margin-top: 20px;
-        }
-
-        .transactions ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .transactions ul li {
-            margin-bottom: 10px;
-        }
-    </style>
+    <title>Savings Page</title>
+    <link rel="stylesheet" href="savings.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Total Savings: <span id="total-savings">₹0.00</span></h1>
-        <div class="transactions">
-            <h2>Last 5 Transactions</h2>
-            <ul id="savings-history"></ul>
-        </div>
+        <h1>Savings Page</h1>
+        <div>Total Savings: <span id="total-savings"></span></div>
+        <h2>Last 5 Transactions</h2>
+        <ul id="savings-history"></ul>
     </div>
     <script src="savings.js"></script>
 </body>

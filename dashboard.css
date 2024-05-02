@@ -2,16 +2,15 @@ body, html {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
+}
+
+body {
     background-image: url('dashboard.gif');
     background-size: cover;
     background-repeat: no-repeat;
-}
-
-.center {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .container {

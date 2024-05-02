@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('username').textContent = username;
 
     // Fetch total income, total expense, and total savings from local storage and display
-    var totalIncome = localStorage.getItem('totalIncome') || 0;
-    var totalExpense = localStorage.getItem('totalExpense') || 0;
+    var totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
+    var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
     var totalSavings = totalIncome - totalExpense;
     document.getElementById('total-income').textContent = totalIncome.toFixed(2);
     document.getElementById('total-expense').textContent = totalExpense.toFixed(2);

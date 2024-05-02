@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     var expenseForm = document.getElementById('expense-form');
     var expenseHistory = document.getElementById('expense-history');
-    var totalExpenses = document.getElementById('total-expense');
+    var totalExpense = document.getElementById('total-expense');
     var expenseTransactions = [];
     var showMoreExpenseIndex = 5;
 
     // Load transactions from localStorage
     if (localStorage.getItem('expenseTransactions')) {
         expenseTransactions = JSON.parse(localStorage.getItem('expenseTransactions'));
-        updateTotalExpenses();
+        updateTotalExpense();
         updateExpenseHistory();
     }
 
@@ -24,18 +24,28 @@ document.addEventListener('DOMContentLoaded', function() {
         // Save transactions to localStorage
         localStorage.setItem('expenseTransactions', JSON.stringify(expenseTransactions));
 
-        updateTotalExpenses();
+        updateTotalExpense();
         updateExpenseHistory();
 
         document.getElementById('source').value = '';
         document.getElementById('amount').value = '';
     });
 
-    function updateTotalExpenses() {
-        var currentTotalExpenses = expenseTransactions.reduce(function(acc, transaction) {
+    // Add event listener for the "Clear All" button
+    document.getElementById('clear-all').addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear all expenses?')) {
+            expenseTransactions = [];
+            localStorage.removeItem('expenseTransactions');
+            updateTotalExpense();
+            updateExpenseHistory();
+        }
+    });
+
+    function updateTotalExpense() {
+        var currentTotalExpense = expenseTransactions.reduce(function(acc, transaction) {
             return acc + transaction.amount;
         }, 0);
-        totalExpenses.textContent = currentTotalExpenses >= 0 ? '₹' + currentTotalExpenses.toFixed(2) : '-₹' + Math.abs(currentTotalExpenses).toFixed(2);
+        totalExpense.textContent = currentTotalExpense.toFixed(2);
     }
 
     function updateExpenseHistory() {

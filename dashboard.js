@@ -15,11 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
     totalIncomeElement.textContent = totalIncome.toFixed(2);
     totalExpenseElement.textContent = totalExpense.toFixed(2);
     
-    // Display total savings
     if (totalSavings >= 1) {
         totalSavingsElement.textContent = totalSavings.toFixed(2);
     } else {
-        totalSavingsElement.textContent = 'You have no savings left.';
+        totalSavingsElement.textContent = 'You have no savings till now';
     }
 
     // Logout button

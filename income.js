@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         lastIncomeTransactions.forEach(function(transaction) {
             var incomeEntry = document.createElement('li');
-            incomeEntry.textContent = '+ ₹' + transaction.amount.toFixed(2) + ' - ' + transaction.source;
+            incomeEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2);
             incomeHistory.appendChild(incomeEntry);
         });
 

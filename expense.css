@@ -15,3 +15,20 @@ body {
     color: white;
     text-align: center;
 }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Add this CSS to create a white line below the heading */
+h2 {
+    border-bottom: 0.7mm solid white;
+    padding-bottom: 10px; /* Adjust as needed */
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+/* Add this CSS to make the transaction history red */
+ul#expense-history li {
+    color: red;
+}

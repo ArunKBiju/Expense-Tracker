@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         savingsHistory.innerHTML = '';
         transactions.slice(-5).forEach(function(transaction) {
             var transactionEntry = document.createElement('li');
-            transactionEntry.textContent = (transaction.amount >= 0 ? '+' : '-') + ' ₹' + Math.abs(transaction.amount.toFixed(2)) + ' - ' + transaction.source;
+            transactionEntry.textContent = (transaction.amount >= 0 ? '+' : '-') + ' ₹' + Math.abs(transaction.amount).toFixed(2) + ' - ' + transaction.source;
             transactionEntry.style.color = transaction.amount >= 0 ? 'green' : 'red';
             savingsHistory.appendChild(transactionEntry);
         });

@@ -8,13 +8,16 @@ document.addEventListener('DOMContentLoaded', function() {
     var username = localStorage.getItem('username');
     var totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
     var totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0;
-    var totalSavings = parseFloat(localStorage.getItem('totalSavings')) || 0;
+    var totalSavings = totalIncome - totalExpense;
+
+    // Update total savings in localStorage
+    localStorage.setItem('totalSavings', totalSavings.toFixed(2));
 
     // Display user information
     usernameElement.textContent = username;
     totalIncomeElement.textContent = totalIncome.toFixed(2);
     totalExpenseElement.textContent = totalExpense.toFixed(2);
-    totalSavingsElement.textContent = totalSavings.toFixed(2);
+    totalSavingsElement.textContent = totalSavings >= 0 ? totalSavings.toFixed(2) : '0.00';
 
     // Logout button
     document.getElementById('logout').addEventListener('click', function() {

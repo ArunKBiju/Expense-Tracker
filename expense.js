@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         lastExpenseTransactions.forEach(function(transaction) {
             var expenseEntry = document.createElement('li');
-            expenseEntry.textContent = transaction.source + ' - ₹' + transaction.amount.toFixed(2);
+            expenseEntry.textContent = '₹' + transaction.amount.toFixed(2) + ' - ' + transaction.source;
+            expenseEntry.style.color = 'red'; // Ensure the text is in red color
             expenseHistory.appendChild(expenseEntry);
         });
 

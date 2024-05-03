@@ -28,7 +28,7 @@ h2 {
     margin-bottom: 10px; /* Adjust as needed */
 }
 
-/* Add this CSS to make the transaction history red */
+/* Add this CSS to make the transaction history red with a - symbol */
 ul#expense-history li {
     color: red;
 }
